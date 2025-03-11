@@ -13,5 +13,19 @@ router.get("/", (req, res) => {
   });
 });
 
+// Rotta per ottenere un singolo film con le recensioni
+router.get("/:id", (req, res) => {
+  const movieId = req.params.id;
+
+  Movie.getMovieById(movieId, (err, movie) => {
+    if (err) {
+      return res.status(500).json({ error: "Errore nel recupero del film" });
+    }
+    if (!movie) {
+      return res.status(404).json({ error: "Film non trovato" });
+    }
+    res.json(movie);
+  });
+});
 
 module.exports = router;
