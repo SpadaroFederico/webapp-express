@@ -15,5 +15,5 @@ app.use("/movies", moviesRoutes);
 
 // Avvio del server
 app.listen(PORT, () => {
-  console.log(`🚀 Server in esecuzione su http://localhost:${PORT}`);
+  console.log(`Server in esecuzione su http://localhost:${PORT}`);
 });
