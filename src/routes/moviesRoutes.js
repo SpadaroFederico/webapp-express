@@ -28,4 +28,22 @@ router.get("/:id", (req, res) => {
   });
 });
 
+// Rotta per aggiungere una recensione
+router.post("/:id/reviews", (req, res) => {
+  const movieId = req.params.id;
+  const { name, vote, text } = req.body;
+
+  const query = `
+    INSERT INTO reviews (movie_id, name, vote, text)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  db.query(query, [movieId, name, vote, text], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: "Errore nell'aggiunta della recensione" });
+    }
+    res.status(201).json({ message: "Recensione aggiunta con successo!" });
+  });
+});
+
 module.exports = router;
